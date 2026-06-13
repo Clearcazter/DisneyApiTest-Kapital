@@ -10,10 +10,8 @@ import Foundation
 
 final class DisneyService: DisneyServiceProtocol {
     static let shared: DisneyService = {
-        let cache = URLCache(
-            memoryCapacity: 50 * 1024 * 1024,
-            diskCapacity: 200 * 1024 * 1024
-        )
+        let cache = URLCache(memoryCapacity: 50 * 1024 * 1024,
+                             diskCapacity: 200 * 1024 * 1024)
         let config = URLSessionConfiguration.default
         config.urlCache = cache
         config.requestCachePolicy = .returnCacheDataElseLoad

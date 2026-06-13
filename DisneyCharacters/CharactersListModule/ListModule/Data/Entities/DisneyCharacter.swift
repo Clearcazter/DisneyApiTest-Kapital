@@ -26,4 +26,12 @@ struct DisneyCharacter: Identifiable, Decodable, Hashable {
         case videoGames, parkAttractions
         case allies, enemies, sourceUrl
     }
+    
+    var primaryAppearance: String? {
+        films.first ?? tvShows.first ?? videoGames.first
+    }
+
+    var totalAppearances: Int {
+        films.count + tvShows.count + videoGames.count
+    }
 }
