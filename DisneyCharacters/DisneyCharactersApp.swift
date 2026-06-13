@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 @main
 struct DisneyCharactersApp: App {
     var body: some Scene {
         WindowGroup {
             DisneyContentView()
+                .modelContainer(PersistenceController.shared)
         }
     }
 }
