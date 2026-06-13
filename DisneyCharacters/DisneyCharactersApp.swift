@@ -2,7 +2,7 @@
 //  DisneyCharactersApp.swift
 //  DisneyCharacters
 //
-//  Created by Alejandro Azpitarte on 13/06/26.
+//  Created by Adrian Azpi on 13/06/26.
 //
 
 import SwiftUI
@@ -11,7 +11,7 @@ import SwiftUI
 struct DisneyCharactersApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CharacterListView()
         }
     }
 }

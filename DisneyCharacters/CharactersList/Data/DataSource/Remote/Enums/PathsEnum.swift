@@ -1,0 +1,13 @@
+////
+//  PathsEnum.swift
+//  DisneyCharacters
+//
+//  Created by Tu Adrian Azpi el 13/06/26.
+//  
+//
+
+import Foundation
+
+enum PathsEnum: String {
+    case baseUrl =  "https://api.disneyapi.dev"
+}
