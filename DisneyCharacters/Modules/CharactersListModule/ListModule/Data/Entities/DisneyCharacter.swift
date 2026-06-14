@@ -34,4 +34,9 @@ struct DisneyCharacter: Identifiable, Decodable, Hashable {
     var totalAppearances: Int {
         films.count + tvShows.count + videoGames.count
     }
+    
+    var imageURL: URL? {
+        guard let imageUrl, let url = URL(string: imageUrl) else { return nil }
+        return url
+    }
 }

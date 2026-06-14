@@ -26,6 +26,7 @@ SwiftUIToda -> la interfaz de usuario, navegación y composición de vistas
 Combine -> Através de ObservableObject / @Published en los ViewModelsSwiftDataPersistencia local de personajes y favoritos
 URLSession + URLCache -> Networking y caché de imágenes/respuestas HTTP
 XCTest -> Pruebas unitarias de ViewModels y Repositories
+CachedAsyncImage -> Para ver imagenes en modo offline, ya que la implementación nativa de AsyncImage no respeta políticas de caché personalizadas.
 
 No se utilizaron dependencias externas (SPM/CocoaPods) — todo el proyecto se construye con frameworks nativos de Apple.
 

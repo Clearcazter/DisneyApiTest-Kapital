@@ -18,7 +18,7 @@ struct CharacterDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
-                RemoteImageView(urlString: viewModel.character.imageUrl)
+                CachedAsyncImage(url: viewModel.character.imageURL)
                     .accessibilityHidden(true)
                 infoSection
             }

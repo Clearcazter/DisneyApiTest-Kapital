@@ -13,24 +13,12 @@ struct CharacterCell: View {
     
     var body: some View {
         HStack(spacing: 12) {
-            AsyncImage(url: URL(string: character.imageUrl ?? "")) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                case .failure, .empty:
-                    Image(systemName: "person.fill")
-                        .foregroundStyle(.secondary)
-                default:
-                    ProgressView()
-                }
-            }
-            .frame(width: 64, height: 64)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .background(Color(.systemGray6))
-            .clipShape(RoundedRectangle(cornerRadius: 10))
-            .accessibilityHidden(true)
+            CachedAsyncImage(url: URL(string: character.imageUrl ?? ""))
+                .frame(width: 64, height: 64)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .background(Color(.systemGray6))
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+                .accessibilityHidden(true)
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(character.name)
