@@ -9,7 +9,6 @@
 import Foundation
 import SwiftData
 
-
 enum PersistenceController {
     static let shared: ModelContainer = {
         let schema = Schema([LocalCharacter.self, FavoriteCharacter.self])

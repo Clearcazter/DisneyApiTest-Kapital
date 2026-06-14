@@ -17,20 +17,20 @@ final class CharacterListViewModel: ObservableObject {
     @Published var hasNextPage: Bool = true
     @Published var isLoadingMoreCharacters: Bool = false
     
-    private let disneyService: DisneyServiceProtocol
-    private let store: CharacterStoreProtocol
+    private let getCachedCharactersUseCase: GetCachedCharactersUseCaseProtocol
+    private let getCharactersUseCase: FetchCharactersUseCaseProtocol
     
-    init(disneyService: DisneyServiceProtocol = DisneyService.shared,
-         store: CharacterStoreProtocol = CharacterStoreImplementation.shared) {
-        self.disneyService = disneyService
-        self.store = store
+    init(getCachedCharactersUseCase: GetCachedCharactersUseCaseProtocol = GetCachedCharactersUseCase(),
+         getCharactersUseCase: FetchCharactersUseCaseProtocol = FetchCharactersUseCase()) {
+        self.getCachedCharactersUseCase = getCachedCharactersUseCase
+        self.getCharactersUseCase = getCharactersUseCase
     }
     
     func loadInitialData() async {
         guard characters.isEmpty else {
             return
         }
-        let local = store.loadAll()
+        let local = getCachedCharactersUseCase.execute()
         if !local.isEmpty {
             await MainActor.run {
                 characters = local
@@ -46,7 +46,6 @@ final class CharacterListViewModel: ObservableObject {
     private func rerfeshLocal() async {
         await load(page: 1, isRefresh: true)
         await MainActor.run { isLoadingMoreCharacters = false }
-
     }
     
     func loadMoreCharacters() async {
@@ -60,16 +59,15 @@ final class CharacterListViewModel: ObservableObject {
     
     private func load(page: Int, isRefresh: Bool) async {
         do {
-            let response = try await disneyService.getCharactersBy(page: page)
-            try? store.save(response.data, page: page)
+            let result = try await getCharactersUseCase.execute(page: page)
             await MainActor.run {
                 if isRefresh {
-                    characters = response.data
+                    characters = result.characters
                 } else {
-                    characters += response.data
+                    characters += result.characters
                 }
-                hasNextPage = response.info.nextPage != nil
-                currentPage = page
+                hasNextPage = result.hasNextPage
+                currentPage = result.page
                 errorString = nil
             }
         } catch {

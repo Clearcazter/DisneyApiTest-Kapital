@@ -12,26 +12,23 @@ final class CharacterDetailViewModel: ObservableObject {
     @Published var isFavorite: Bool = false
     
     let character: DisneyCharacter
-    private let store: FavoritesStoreProtocol
+    private let checkFavoriteUseCase: CheckFavoriteUseCaseProtocol
+    private let toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol
     
     init(character: DisneyCharacter,
-         store: FavoritesStoreProtocol = FavoritesStoreImplementation.shared) {
+         checkFavoriteUseCase: CheckFavoriteUseCaseProtocol = CheckFavoriteUseCase(),
+         toggleFavoriteUseCase: ToggleFavoriteUseCaseProtocol = ToggleFavoriteUseCase()) {
         self.character = character
-        self.store = store
-        self.isFavorite = store.isFavorite(character)
+        self.checkFavoriteUseCase = checkFavoriteUseCase
+        self.toggleFavoriteUseCase = toggleFavoriteUseCase
+        self.isFavorite = checkFavoriteUseCase.execute(character)
     }
     
     func toggleFavorite() {
         do {
-            if isFavorite {
-                try store.remove(character)
-            } else {
-                try store.add(character)
-            }
-            isFavorite.toggle()
+            isFavorite = try toggleFavoriteUseCase.execute(character)
         } catch {
             debugPrint("Error al guardar favorito: \(error)")
-            // manejo de error en caso de no poder guardar
         }
     }
 }
