@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CharacterCell: View {
     let character: DisneyCharacter
+    
     var body: some View {
         HStack(spacing: 12) {
             AsyncImage(url: URL(string: character.imageUrl ?? "")) { phase in
@@ -29,6 +30,8 @@ struct CharacterCell: View {
             .clipShape(RoundedRectangle(cornerRadius: 10))
             .background(Color(.systemGray6))
             .clipShape(RoundedRectangle(cornerRadius: 10))
+            .accessibilityHidden(true)
+            
             VStack(alignment: .leading, spacing: 4) {
                 Text(character.name)
                     .font(.headline)
@@ -43,5 +46,7 @@ struct CharacterCell: View {
             Spacer()
         }
         .padding(.vertical, 4)
+        .accessibilityElement(children: .combine)
+        .accessibilityHint("Toca para ver el detalle")
     }
 }

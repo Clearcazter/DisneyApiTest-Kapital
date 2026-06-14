@@ -23,5 +23,7 @@ struct AppearanceSection: View {
                     .foregroundStyle(.secondary)
             }
         }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title): \(items.joined(separator: ", "))")
     }
 }

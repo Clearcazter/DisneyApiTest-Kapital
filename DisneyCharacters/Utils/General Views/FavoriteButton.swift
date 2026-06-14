@@ -24,6 +24,8 @@ struct FavoriteButton: View {
                 .animation(.spring(duration: 0.3),
                            value: isFavorite)
         }
+        .accessibilityLabel("Favorito")
+        .accessibilityValue(isFavorite ? "Activado" : "Desactivado")
     }
 }
 

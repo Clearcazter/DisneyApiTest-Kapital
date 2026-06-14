@@ -19,6 +19,7 @@ struct CharacterDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 0) {
                 RemoteImageView(urlString: viewModel.character.imageUrl)
+                    .accessibilityHidden(true)
                 infoSection
             }
         }

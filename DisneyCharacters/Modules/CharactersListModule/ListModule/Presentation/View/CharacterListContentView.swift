@@ -59,6 +59,7 @@ struct CharacterListContentView: View {
     private var CharacterList: some View {
         ForEach(viewModel.characters, id: \.id) { character in
             CharacterCell(character: character)
+                .accessibilityAddTraits(.isButton)
                 .onTapGesture {
                     router.navigate(to: .detail(character))
                 }
