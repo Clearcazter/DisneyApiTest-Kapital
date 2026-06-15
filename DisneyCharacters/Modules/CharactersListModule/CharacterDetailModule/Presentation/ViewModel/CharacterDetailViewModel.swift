@@ -31,4 +31,8 @@ final class CharacterDetailViewModel: ObservableObject {
             debugPrint("Error al guardar favorito: \(error)")
         }
     }
+    
+    func refreshFavoriteStatus() {
+        isFavorite = checkFavoriteUseCase.execute(character)
+    }
 }

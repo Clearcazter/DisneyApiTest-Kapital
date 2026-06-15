@@ -32,6 +32,9 @@ struct CharacterDetailView: View {
                 }
             }
         }
+        .onAppear {
+            viewModel.refreshFavoriteStatus()
+        }
     }
     
     private var infoSection: some View {
